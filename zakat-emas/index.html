@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Zakat Emas Online - Hitung Zakat Emas 85 Gram</title>
+    <meta name="description" content="Hitung zakat emas Anda secara mudah. Kalkulator zakat emas batangan dan perhiasan berdasarkan nishab 85 gram dan harga emas hari ini.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://asepridwanriswanto-cmd.github.io/kalkulator-zakat/zakat-emas/">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Kalkulator Zakat Emas",
+      "description": "Kalkulator online gratis untuk menghitung zakat emas berdasarkan nishab 85 gram.",
+      "applicationCategory": "FinanceApplication",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #333; line-height: 1.7; padding: 20px; }
+        .container { max-width: 760px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        h1 { font-size: 1.7rem; margin-bottom: 8px; color: #1a1a2e; line-height: 1.3; }
+        .subtitle { color: #555; margin-bottom: 24px; font-size: 0.98rem; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; }
+        .hint { font-weight: 400; color: #888; font-size: 0.8rem; }
+        input[type="number"] { width: 100%; padding: 12px 14px; border: 1.5px solid #d1d5db; border-radius: 8px; font-size: 1rem; }
+        input[type="number"]:focus { outline: none; border-color: #2563eb; }
+        button { width: 100%; padding: 14px; background: #2563eb; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; }
+        button:hover { background: #1d4ed8; }
+        .result { margin-top: 24px; padding: 20px; background: #f0f9ff; border-radius: 10px; border-left: 4px solid #2563eb; display: none; }
+        .result.show { display: block; }
+        .result h2 { font-size: 1.1rem; margin-bottom: 12px; color: #1e40af; }
+        .result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e0f2fe; gap: 12px; }
+        .result-row:last-child { border-bottom: none; }
+        .result-label { color: #555; }
+        .result-value { font-weight: 600; color: #1a1a2e; text-align: right; }
+        .zakat-total { font-size: 1.4rem; color: #2563eb; font-weight: 700; }
+        .not-wajib { color: #dc2626; }
+        .content-section { margin-top: 40px; }
+        .content-section h2 { font-size: 1.35rem; margin-bottom: 14px; color: #1a1a2e; }
+        .content-section p, .content-section ul { margin-bottom: 12px; color: #444; font-size: 0.96rem; }
+        .content-section ul { margin-left: 20px; }
+        .disclaimer { margin-top: 40px; padding: 16px; background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 8px; font-size: 0.88rem; color: #78350f; }
+        footer { text-align: center; margin-top: 32px; padding: 20px 0 0; color: #888; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
+        @media (max-width: 600px) { .container { padding: 20px; } h1 { font-size: 1.4rem; } .result-row { flex-direction: column; gap: 2px; } .result-value { text-align: left; } }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Kalkulator Zakat Emas</h1>
+        <p class="subtitle">Hitung kewajiban zakat dari emas batangan atau perhiasan yang Anda simpan. Nishab zakat emas adalah 85 gram.</p>
+
+        <div class="form-group">
+            <label for="beratEmas">Total Berat Emas yang Disimpan (Gram)</label>
+            <input type="number" id="beratEmas" placeholder="Contoh: 100" min="0" step="0.1">
+        </div>
+        <div class="form-group">
+            <label for="hargaEmas">Harga Emas per Gram Saat Ini (Rp)</label>
+            <input type="number" id="hargaEmas" placeholder="Contoh: 1800000" min="0" value="1800000">
+        </div>
+        <button onclick="hitungZakatEmas()">Hitung Zakat Emas</button>
+
+        <div class="result" id="hasil">
+            <h2>Hasil Perhitungan</h2>
+            <div class="result-row">
+                <span class="result-label">Total Nilai Emas (Rp)</span>
+                <span class="result-value" id="totalHarta">-</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Status Nishab (85 gram)</span>
+                <span class="result-value" id="status">-</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Zakat yang perlu dibayar (2,5%)</span>
+                <span class="result-value zakat-total" id="zakat">-</span>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h2>Bagaimana Cara Menghitung Zakat Emas?</h2>
+            <p>Zakat emas wajib ditunaikan jika dua syarat terpenuhi:</p>
+            <ul>
+                <li><strong>Mencapai Nishab:</strong> Berat emas yang disimpan mencapai 85 gram.</li>
+                <li><strong>Mencapai Haul:</strong> Emas tersebut telah dimiliki/disimpan selama satu tahun Hijriah (sekitar 354 hari).</li>
+            </ul>
+            <p>Jika kedua syarat di atas terpenuhi, kadar zakat yang dikeluarkan adalah <strong>2,5%</strong> dari total nilai emas (berat emas dikali harga emas per gram saat ini).</p>
+            <p>Untuk emas yang digunakan sehari-hari sebagai perhiasan (bukan untuk investasi), mayoritas ulama membolehkan tidak dizakati jika tidak berlebihan. Namun, untuk emas batangan (investasi), tetap wajib dizakati jika mencapai nishab dan haul.</p>
+        </section>
+
+        <section class="content-section" style="text-align: center; margin-top: 30px;">
+            <p>Ingin menghitung zakat penghasilan? <a href="../" style="color: #2563eb; font-weight: bold; text-decoration: none;">Kembali ke Kalkulator Zakat Utama</a></p>
+        </section>
+        <div class="disclaimer"><strong>Disclaimer:</strong> Hasil perhitungan bersifat estimasi. Konsultasikan dengan amil zakat resmi untuk kepastian hukum.</div>
+        <footer>&copy; 2026 Kalkulator Zakat Penghasilan.</footer>
+    </main>
+    <script>
+        function hitungZakatEmas() {
+            const berat = parseFloat(document.getElementById('beratEmas').value) || 0;
+            const harga = parseFloat(document.getElementById('hargaEmas').value) || 0;
+            if (berat <= 0 || harga <= 0) { alert('Isi data dengan lengkap.'); return; }
+            
+            const totalHarta = berat * harga;
+            const nishabGram = 85;
+            const wajib = berat >= nishabGram;
+            const zakat = wajib ? totalHarta * 0.025 : 0;
+
+            document.getElementById('totalHarta').textContent = 'Rp ' + Math.round(totalHarta).toLocaleString('id-ID');
+            
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = wajib ? 'Mencapai Nishab' : 'Belum Mencapai Nishab';
+            statusEl.className = 'result-value' + (wajib ? '' : ' not-wajib');
+            
+            document.getElementById('zakat').textContent = 'Rp ' + Math.round(zakat).toLocaleString('id-ID');
+            document.getElementById('hasil').classList.add('show');
+        }
+    </script>
+</body>
+</html>
